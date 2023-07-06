@@ -1,5 +1,6 @@
 package com.kvngleissner;
 
+import com.kvngleissner.entity.Player;
 import com.kvngleissner.handler.KeyHandler;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
     final int FPS = 60;
 
-    final int tileSize = originalTileSize * scale; // 64 x 64 tile
+    public final int tileSize = originalTileSize * scale; // 64 x 64 tile
     final int maxScreenColumn = 24;
     final int maxScreenRow = 18;
 
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    Player player = new Player(this, keyHandler);
 
     // Set Player Default Position
     int playerXPos = 100;
@@ -62,23 +64,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(keyHandler.upKeyPressed == true) {
-            playerYPos -= playerSpeed;
-        } else if (keyHandler.downKeyPressed == true) {
-            playerYPos += playerSpeed;
-        } else if(keyHandler.rightKeyPressed  == true) {
-            playerXPos += playerSpeed;
-        } else if (keyHandler.leftKeyPressed) {
-            playerXPos -= playerSpeed;
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-
         Graphics2D graphics2D = (Graphics2D) graphics;
-        graphics2D.setColor(Color.white);
-        graphics2D.fillRect(playerXPos, playerYPos, tileSize, tileSize);
+        player.draw(graphics2D);
         graphics2D.dispose();
     }
 }
