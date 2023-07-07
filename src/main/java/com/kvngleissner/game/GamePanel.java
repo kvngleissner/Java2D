@@ -3,6 +3,7 @@ package com.kvngleissner.game;
 import com.kvngleissner.collision.CollisionHandler;
 import com.kvngleissner.entity.Player;
 import com.kvngleissner.handler.KeyHandler;
+import com.kvngleissner.sound.Sound;
 import com.kvngleissner.tile.TileManager;
 
 import javax.swing.*;
@@ -15,14 +16,15 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
     final int FPS = 60;
 
-    public final int tileSize = originalTileSize * scale; // 64 x 64 tile
-    public final int maxScreenColumn = 24;
-    public final int maxScreenRow = 18;
+    public  int tileSize = originalTileSize * scale; // 64 x 64 tile
+    public  int maxScreenColumn = 24;
+    public  int maxScreenRow = 18;
 
-    public final int screenWidth = tileSize * maxScreenColumn; // 1152 Pixels
-    public final int screenHeight = tileSize * maxScreenRow; // 768 Pixls
+    public int screenWidth = tileSize * maxScreenColumn; // 1152 Pixels
+    public int screenHeight = tileSize * maxScreenRow; // 768 Pixls
 
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
+    Sound soundManager = new Sound();
     Thread gameThread;
     public Player player = new Player(this, keyHandler);
     public TileManager tileManager = new TileManager(this);
@@ -40,7 +42,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        playMusic(0);
     }
+
 
     public void startGameThread() {
         // Passing Gamepanel in the Constructor
@@ -88,5 +92,18 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.draw(graphics2D);
         player.draw(graphics2D);
         graphics2D.dispose();
+    }
+
+    public void playMusic(int i) {
+        soundManager.setFile(i);
+        soundManager.playSound();
+        soundManager.loopSound();
+    }
+    public void stopMusic() {
+        soundManager.stopSound();
+    }
+    public void playSoundEffect(int i) {
+        soundManager.setFile(i);
+        soundManager.playSound();
     }
 }

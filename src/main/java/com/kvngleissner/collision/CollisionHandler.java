@@ -9,19 +9,22 @@ public class CollisionHandler {
         this.panel = gamePanel;
     }
 
+    /**
+     * Checks for Collisionsbetween entities in each direction
+     * @param entity
+     */
     public void checkTileCollision(Entity entity) {
         int entityLeftWorldX = entity.worldXPos + entity.solidArea.x;
         int entityRightWorldX = entity.worldXPos + entity.solidArea.x + entity.solidArea.width;
-        int entityTopWorldY = entity.worldYPos + entity.solidArea.y;
-        int entityBottomWorldY = entity.worldYPos + entity.solidArea.y + entity.solidArea.height;
+        int entityTopWorldY = (int) (entity.worldYPos + entity.solidArea.y);
+        int entityBottomWorldY = (int) (entity.worldYPos + entity.solidArea.y + entity.solidArea.height);
 
-        int entityLeftCol = entityLeftWorldX / panel.tileSize;
-        int entityRightCol = entityRightWorldX / panel.tileSize;
+        int entityLeftCol = (entityLeftWorldX / panel.tileSize);
+        int entityRightCol =  (entityRightWorldX / panel.tileSize);
         int entityTopRow = entityTopWorldY / panel.tileSize;
         int entityBottomRow = entityBottomWorldY / panel.tileSize;
 
         int tileNumber1, tileNumber2;
-
 
         switch (entity.direction) {
             case "up":
@@ -41,7 +44,7 @@ public class CollisionHandler {
                 }
                 break;
             case "left":
-                entityLeftCol = (entityLeftWorldX - entity.speed) / panel.tileSize;
+                entityLeftCol = (int) ((entityLeftWorldX - entity.speed) / panel.tileSize);
                 tileNumber1 = panel.tileManager.mapTileNumber[entityLeftCol][entityTopRow];
                 tileNumber2 = panel.tileManager.mapTileNumber[entityLeftCol][entityBottomRow];
                 if(panel.tileManager.tiles[tileNumber1].collision || panel.tileManager.tiles[tileNumber2].collision) {
@@ -49,7 +52,7 @@ public class CollisionHandler {
                 }
                 break;
             case "right":
-                entityRightCol = (entityRightWorldX + entity.speed) / panel.tileSize;
+                entityRightCol = (int) ((entityRightWorldX + entity.speed) / panel.tileSize);
                 tileNumber1 = panel.tileManager.mapTileNumber[entityRightCol][entityTopRow];
                 tileNumber2 = panel.tileManager.mapTileNumber[entityRightCol][entityBottomRow];
                 if(panel.tileManager.tiles[tileNumber1].collision || panel.tileManager.tiles[tileNumber2].collision) {
