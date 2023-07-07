@@ -1,4 +1,4 @@
-package com.kvngleissner;
+package com.kvngleissner.game;
 
 import javax.swing.*;
 

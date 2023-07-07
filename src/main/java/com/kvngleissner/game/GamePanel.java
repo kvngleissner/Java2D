@@ -1,5 +1,6 @@
-package com.kvngleissner;
+package com.kvngleissner.game;
 
+import com.kvngleissner.collision.CollisionHandler;
 import com.kvngleissner.entity.Player;
 import com.kvngleissner.handler.KeyHandler;
 import com.kvngleissner.tile.TileManager;
@@ -24,7 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     public Player player = new Player(this, keyHandler);
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
+    public CollisionHandler collisionHandler = new CollisionHandler(this);
 
     // WORLD SETTINGS
     public final int maxWorldColumn = 50;
@@ -60,11 +62,11 @@ public class GamePanel extends JPanel implements Runnable {
             delta += (currentTime - lasttime) /drawInterval;
             lasttime = currentTime;
             if(delta >= 1) {
-                // UPDATE : updating information such a character pos
-                update();
-                // DRAW : Drawing the screen with updated Information
-                repaint();
-                delta--;
+                // UPDATE : updating information such a character position
+                    update();
+                    // DRAW : Drawing the screen with updated Information
+                    repaint();
+                    delta--;
             }
         }
     }
