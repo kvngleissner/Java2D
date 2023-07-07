@@ -22,6 +22,10 @@ public class Player extends Entity{
         getPlayerImage();
     }
 
+
+    /**
+     * Gets the Player Sprites from the resources folder
+     */
     public void getPlayerImage() {
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
@@ -44,6 +48,9 @@ public class Player extends Entity{
         direction = "down";
     }
 
+    /**
+     * Handles player movement and sets direction for the Sprite Animation
+     */
     public void update() {
         // Checks for player input before updating player sprite
         if(handler.upKeyPressed || handler.rightKeyPressed || handler.leftKeyPressed || handler.downKeyPressed) {
@@ -63,6 +70,11 @@ public class Player extends Entity{
             updateSprite(15);
         }
     }
+
+    /**
+     * Draws individual Sprites and Switches between them for Animation
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
         switch (direction) {
@@ -102,6 +114,11 @@ public class Player extends Entity{
         graphics2D.drawImage(image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
+
+    /**
+     * Updates the Sprite every 15 frames currently
+     * @param refresh sets how many frames it takes for the sprite to get changed
+     */
     public void updateSprite(int refresh) {
         // Updates the Sprite counter to change the player Image every 15 Frames
         spriteCounter++;

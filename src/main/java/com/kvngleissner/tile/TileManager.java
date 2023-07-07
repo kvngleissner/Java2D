@@ -23,6 +23,9 @@ public class TileManager {
 
     }
 
+    /**
+     * Loads tiles from the Resources folder
+     */
     public void getTileImage() {
         try {
             tiles[0] = new Tile();
@@ -47,6 +50,11 @@ public class TileManager {
             exception.printStackTrace();
         }
     }
+
+    /**
+     * Draws the World Map dynamically inside the Camera Bounds
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         int worldColumn = 0;
         int worldRow = 0;
@@ -71,6 +79,11 @@ public class TileManager {
         }
     }
 
+
+    /**
+     * Loads the Map Data from a Text file and readys it for Drawing
+     * @param path
+     */
     public void loadMapData(String path) {
         try {
             InputStream inputStream = getClass().getResourceAsStream(path);

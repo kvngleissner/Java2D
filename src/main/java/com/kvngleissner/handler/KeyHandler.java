@@ -11,6 +11,10 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Checks for the currently pressed key
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -28,6 +32,11 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+
+    /**
+     * Checks if the key is releases
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

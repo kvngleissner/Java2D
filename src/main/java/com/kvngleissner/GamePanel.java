@@ -46,6 +46,9 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
+    /**
+     * Updates the Game with the delta Time
+     */
     @Override
     public void run() {
         double drawInterval = 1000000000 / FPS;
@@ -66,10 +69,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Calls player Update
+     */
     public void update() {
         player.update();
     }
 
+    /**
+     * Draws the Player and Tiles
+     * @param graphics the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
