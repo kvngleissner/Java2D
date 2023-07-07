@@ -1,11 +1,17 @@
 package com.kvngleissner.handler;
 
+import com.kvngleissner.game.GamePanel;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
     public boolean upKeyPressed, rightKeyPressed, downKeyPressed, leftKeyPressed, escapeKeyPressed;
+    GamePanel panel;
+    public KeyHandler(GamePanel gamePanel) {
+        this.panel = gamePanel;
+    }
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -29,9 +35,6 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D) {
             rightKeyPressed = true;
-        }
-        if(code == KeyEvent.VK_ESCAPE) {
-            escapeKeyPressed = true;
         }
     }
 
