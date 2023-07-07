@@ -11,10 +11,13 @@ import java.io.IOException;
 public class Player extends Entity{
     GamePanel gamePanel;
     KeyHandler handler;
-
+    public final int screenX;
+    public final int screenY;
     public Player(GamePanel gamePanel, KeyHandler handler) {
         this.gamePanel = gamePanel;
         this.handler = handler;
+        screenX = gamePanel.screenWidth / 2 - (gamePanel.tileSize / 2);
+        screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
         setDefaultValues();
         getPlayerImage();
     }
@@ -35,8 +38,8 @@ public class Player extends Entity{
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldXPos = gamePanel.tileSize * 23;
+        worldYPos = gamePanel.tileSize * 21;
         speed = 4;
         direction = "down";
     }
@@ -46,16 +49,16 @@ public class Player extends Entity{
         if(handler.upKeyPressed || handler.rightKeyPressed || handler.leftKeyPressed || handler.downKeyPressed) {
             if(handler.upKeyPressed == true) {
                 direction = "up";
-                y -= speed;
+                worldYPos -= speed;
             } else if (handler.downKeyPressed == true) {
                 direction = "down";
-                y += speed;
+                worldYPos += speed;
             } else if(handler.rightKeyPressed  == true) {
                 direction = "right";
-                x += speed;
+                worldXPos += speed;
             } else if (handler.leftKeyPressed) {
                 direction = "left";
-                x -= speed;
+                worldXPos -= speed;
             }
             updateSprite(15);
         }
@@ -96,7 +99,7 @@ public class Player extends Entity{
                 }
                 break;
         }
-        graphics2D.drawImage(image, x,y, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
     public void updateSprite(int refresh) {
