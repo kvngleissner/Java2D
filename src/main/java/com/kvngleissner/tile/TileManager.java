@@ -1,6 +1,6 @@
 package com.kvngleissner.tile;
 
-import com.kvngleissner.GamePanel;
+import com.kvngleissner.game.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,8 +11,8 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     GamePanel gamePanel;
-    Tile[] tiles;
-    int mapTileNumber[][];
+    public Tile[] tiles;
+    public int mapTileNumber[][];
 
     public TileManager(GamePanel panel) {
         this.gamePanel = panel;
@@ -23,6 +23,10 @@ public class TileManager {
 
     }
 
+    /**
+     * Loads tiles from the Resources folder
+     * And sets if they are solid or not
+     */
     public void getTileImage() {
         try {
             tiles[0] = new Tile();
@@ -30,16 +34,18 @@ public class TileManager {
 
             tiles[1] = new Tile();
             tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tiles[1].collision = true;
 
             tiles[2] = new Tile();
             tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+            tiles[2].collision = true;
 
             tiles[3] = new Tile();
             tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
 
-
             tiles[4] = new Tile();
             tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+            tiles[4].collision = true;
 
             tiles[5] = new Tile();
             tiles[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
@@ -47,6 +53,11 @@ public class TileManager {
             exception.printStackTrace();
         }
     }
+
+    /**
+     * Draws the World Map dynamically inside the Camera Bounds
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         int worldColumn = 0;
         int worldRow = 0;
@@ -71,6 +82,11 @@ public class TileManager {
         }
     }
 
+
+    /**
+     * Loads the Map Data from a Text file and readys it for Drawing
+     * @param path
+     */
     public void loadMapData(String path) {
         try {
             InputStream inputStream = getClass().getResourceAsStream(path);

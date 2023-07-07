@@ -1,6 +1,6 @@
 package com.kvngleissner.entity;
 
-import com.kvngleissner.GamePanel;
+import com.kvngleissner.game.GamePanel;
 import com.kvngleissner.handler.KeyHandler;
 
 import javax.imageio.ImageIO;
@@ -13,6 +13,7 @@ public class Player extends Entity{
     KeyHandler handler;
     public final int screenX;
     public final int screenY;
+
     public Player(GamePanel gamePanel, KeyHandler handler) {
         this.gamePanel = gamePanel;
         this.handler = handler;
@@ -20,8 +21,18 @@ public class Player extends Entity{
         screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
         setDefaultValues();
         getPlayerImage();
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
     }
 
+
+    /**
+     * Gets the Player Sprites from the resources folder
+     */
     public void getPlayerImage() {
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
@@ -44,25 +55,49 @@ public class Player extends Entity{
         direction = "down";
     }
 
+    /**
+     * Handles player movement and sets direction for the Sprite Animation
+     */
     public void update() {
         // Checks for player input before updating player sprite
+
         if(handler.upKeyPressed || handler.rightKeyPressed || handler.leftKeyPressed || handler.downKeyPressed) {
             if(handler.upKeyPressed == true) {
                 direction = "up";
-                worldYPos -= speed;
             } else if (handler.downKeyPressed == true) {
                 direction = "down";
-                worldYPos += speed;
             } else if(handler.rightKeyPressed  == true) {
                 direction = "right";
-                worldXPos += speed;
             } else if (handler.leftKeyPressed) {
                 direction = "left";
-                worldXPos -= speed;
             }
+            collisionOn = false;
+            gamePanel.collisionHandler.checkTileCollision(this);
             updateSprite(15);
+
+            if(!collisionOn) {
+                switch (direction) {
+                    case "up":
+                    worldYPos -= speed;
+                    break;
+                    case "down":
+                        worldYPos += speed;
+                        break;
+                    case "left":
+                        worldXPos -= speed;
+                        break;
+                    case "right":
+                        worldXPos += speed;
+                        break;
+                }
+            }
         }
     }
+
+    /**
+     * Draws individual Sprites and Switches between them for Animation
+     * @param graphics2D
+     */
     public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
         switch (direction) {
@@ -102,6 +137,11 @@ public class Player extends Entity{
         graphics2D.drawImage(image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
+
+    /**
+     * Updates the Sprite every 15 frames currently
+     * @param refresh sets how many frames it takes for the sprite to get changed
+     */
     public void updateSprite(int refresh) {
         // Updates the Sprite counter to change the player Image every 15 Frames
         spriteCounter++;

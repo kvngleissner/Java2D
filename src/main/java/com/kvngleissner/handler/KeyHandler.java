@@ -5,12 +5,16 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upKeyPressed, rightKeyPressed, downKeyPressed, leftKeyPressed;
+    public boolean upKeyPressed, rightKeyPressed, downKeyPressed, leftKeyPressed, escapeKeyPressed;
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * Checks for the currently pressed key
+     * @param e the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -26,8 +30,16 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_D) {
             rightKeyPressed = true;
         }
+        if(code == KeyEvent.VK_ESCAPE) {
+            escapeKeyPressed = true;
+        }
     }
 
+
+    /**
+     * Checks if the key is releases
+     * @param e the event to be processed
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
@@ -42,6 +54,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D) {
             rightKeyPressed = false;
+        }
+        if(code == KeyEvent.VK_ESCAPE) {
+            escapeKeyPressed = false;
         }
     }
 }
