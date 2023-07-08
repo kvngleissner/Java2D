@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class Sound {
     Clip clip;
-    URL[] soundUrl = new URL[10];
+    URL soundUrl[] = new URL[10];
     FloatControl floatControl;
     public Sound() {
         soundUrl[0] = getClass().getResource("/sound/music/Town.wav");
