@@ -2,7 +2,9 @@ package com.kvngleissner.game;
 
 import com.kvngleissner.collision.CollisionHandler;
 import com.kvngleissner.entity.Player;
+import com.kvngleissner.handler.AssetHandler;
 import com.kvngleissner.handler.KeyHandler;
+import com.kvngleissner.object.ObjectBase;
 import com.kvngleissner.sound.Sound;
 import com.kvngleissner.tile.TileManager;
 
@@ -29,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyHandler);
     public TileManager tileManager = new TileManager(this);
     public CollisionHandler collisionHandler = new CollisionHandler(this);
+    public AssetHandler assetHandler = new AssetHandler(this);
+    public ObjectBase objectBase[] = new ObjectBase[10];
 
     // WORLD SETTINGS
     public final int maxWorldColumn = 50;
@@ -42,9 +46,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-        playMusic(0);
     }
 
+
+    public void setUpGame() {
+        assetHandler.setObject();
+        playMusic(0);
+    }
 
     public void startGameThread() {
         // Passing Gamepanel in the Constructor
@@ -90,6 +98,13 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
         tileManager.draw(graphics2D);
+
+        for(int i = 0; i < objectBase.length; i++) {
+            if(objectBase[i] != null) {
+                objectBase[i].drawObject(graphics2D, this);
+            }
+        }
+
         player.draw(graphics2D);
         graphics2D.dispose();
     }

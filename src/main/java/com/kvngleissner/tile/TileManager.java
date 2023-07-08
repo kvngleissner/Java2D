@@ -66,13 +66,13 @@ public class TileManager {
             int tileNumber = mapTileNumber[worldColumn][worldRow];
             int worldX = worldColumn * gamePanel.tileSize;
             int worldY = worldRow * gamePanel.tileSize;
-            double screenX = worldX - gamePanel.player.worldXPos + gamePanel.player.screenX;
-            double screenY = worldY - gamePanel.player.worldYPos + gamePanel.player.screenY;
+            int screenX = worldX - gamePanel.player.worldXPos + gamePanel.player.screenX;
+            int screenY = worldY - gamePanel.player.worldYPos + gamePanel.player.screenY;
             if(worldX + gamePanel.tileSize > gamePanel.player.worldXPos -gamePanel.player.screenX &&
                     worldX - gamePanel.tileSize < gamePanel.player.worldXPos + gamePanel.player.screenX &&
                     worldY + gamePanel.tileSize > gamePanel.player.worldYPos -gamePanel.player.screenY &&
                     worldY - gamePanel.tileSize < gamePanel.player.worldYPos + gamePanel.player.screenY) {
-                graphics2D.drawImage(tiles[tileNumber].image,(int) screenX,(int) screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+                graphics2D.drawImage(tiles[tileNumber].image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
             }
             worldColumn++;
             if(worldColumn == gamePanel.maxWorldColumn) {

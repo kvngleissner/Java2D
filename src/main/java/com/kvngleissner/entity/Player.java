@@ -137,7 +137,6 @@ public class Player extends Entity{
         graphics2D.drawImage(image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
-
     /**
      * Updates the Sprite every 15 frames currently
      * @param refresh sets how many frames it takes for the sprite to get changed
