@@ -11,7 +11,6 @@ public class ObjectBase {
     public boolean collision = false;
     public int worldXPosition, worldYPosition;
 
-
     public void drawObject(Graphics2D graphics2D, GamePanel panel) {
         int screenX = worldXPosition - panel.player.worldXPos + panel.player.screenX;
         int screenY = worldYPosition - panel.player.worldYPos + panel.player.screenY;

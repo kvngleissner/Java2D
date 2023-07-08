@@ -2,7 +2,9 @@ package com.kvngleissner.game;
 
 import com.kvngleissner.collision.CollisionHandler;
 import com.kvngleissner.entity.Player;
+import com.kvngleissner.handler.AssetHandler;
 import com.kvngleissner.handler.KeyHandler;
+import com.kvngleissner.object.ObjectBase;
 import com.kvngleissner.sound.Sound;
 import com.kvngleissner.tile.TileManager;
 
@@ -27,7 +29,9 @@ public class GamePanel extends JPanel implements Runnable {
     Sound soundManager = new Sound();
     Thread gameThread;
     public Player player = new Player(this, keyHandler);
+    public AssetHandler assetHandler = new AssetHandler(this);
     public TileManager tileManager = new TileManager(this);
+    public ObjectBase base[] = new ObjectBase[10];
     public CollisionHandler collisionHandler = new CollisionHandler(this);
 
     // WORLD SETTINGS
@@ -42,7 +46,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-        playMusic(0);
     }
 
 
@@ -75,6 +78,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public void setUpGame() {
+        assetHandler.setObject();
+        playMusic(0);
+    }
+
     /**
      * Calls player Update
      */
@@ -90,6 +98,13 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
         tileManager.draw(graphics2D);
+
+        for(int i = 0; i < base.length; i++) {
+            if(base[i] != null) {
+                base[i].drawObject(graphics2D, this);
+            }
+        }
+
         player.draw(graphics2D);
         graphics2D.dispose();
     }
