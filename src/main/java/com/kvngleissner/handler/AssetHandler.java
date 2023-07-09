@@ -23,12 +23,25 @@ public class AssetHandler {
         gamePanel.base[1].worldYPosition = 40 * gamePanel.tileSize;
 
         gamePanel.base[2] = new OBJ_Chest();
-        gamePanel.base[2].worldXPosition = 24 * gamePanel.tileSize;
-        gamePanel.base[2].worldYPosition = 40 * gamePanel.tileSize;
+        gamePanel.base[2].worldXPosition = 10 * gamePanel.tileSize;
+        gamePanel.base[2].worldYPosition = 9 * gamePanel.tileSize;
 
         gamePanel.base[3] = new OBJ_Door();
-        gamePanel.base[3].worldXPosition = 7 * gamePanel.tileSize;
-        gamePanel.base[3].worldYPosition = 40 * gamePanel.tileSize;
+        gamePanel.base[3].worldXPosition = 10 * gamePanel.tileSize;
+        gamePanel.base[3].worldYPosition = 11 * gamePanel.tileSize;
+
+        gamePanel.base[4] = new OBJ_Key();
+        gamePanel.base[4].worldXPosition = 23 * gamePanel.tileSize;
+        gamePanel.base[4].worldYPosition = 40 * gamePanel.tileSize;
+
+        gamePanel.base[5] = new OBJ_Door();
+        gamePanel.base[5].worldXPosition = 8 * gamePanel.tileSize;
+        gamePanel.base[5].worldYPosition = 28 * gamePanel.tileSize;
+
+        gamePanel.base[6] = new OBJ_Door();
+        gamePanel.base[6].worldXPosition = 12 * gamePanel.tileSize;
+        gamePanel.base[6].worldYPosition = 22 * gamePanel.tileSize;
+
     }
 
 
