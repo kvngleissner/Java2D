@@ -11,5 +11,6 @@ public class OBJ_Door extends ObjectBase{
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+        collision = true;
     }
 }

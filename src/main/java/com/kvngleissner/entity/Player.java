@@ -25,6 +25,8 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
     }
@@ -73,6 +75,8 @@ public class Player extends Entity{
             }
             collisionOn = false;
             gamePanel.collisionHandler.checkTileCollision(this);
+            int objectIndex = gamePanel.collisionHandler.checkObjectCollison(this, true);
+            pickUpObject(objectIndex);
             updateSprite(15);
 
             if(!collisionOn) {
@@ -135,6 +139,12 @@ public class Player extends Entity{
                 break;
         }
         graphics2D.drawImage(image, screenX,screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+    }
+
+    public void pickUpObject(int index) {
+        if(index != 999) {
+            gamePanel.base[index] = null;
+        }
     }
 
     /**
