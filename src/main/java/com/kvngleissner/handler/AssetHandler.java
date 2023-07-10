@@ -31,7 +31,7 @@ public class AssetHandler {
         gamePanel.base[3].worldYPosition = 11 * gamePanel.tileSize;
 
         gamePanel.base[4] = new OBJ_Key();
-        gamePanel.base[4].worldXPosition = 23 * gamePanel.tileSize;
+        gamePanel.base[4].worldXPosition = 24 * gamePanel.tileSize;
         gamePanel.base[4].worldYPosition = 40 * gamePanel.tileSize;
 
         gamePanel.base[5] = new OBJ_Door();
