@@ -13,7 +13,7 @@ public class Ui {
     public Ui(GamePanel panel) {
         this.panel = panel;
         arial_32 = new Font("Arial", Font.ITALIC, 32);
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(panel);
         keyImage = key.image;
     }
 
