@@ -13,7 +13,7 @@ public class Player extends Entity{
     KeyHandler handler;
     public final int screenX;
     public final int screenY;
-
+    public int hasKey = 0;
     public Player(GamePanel gamePanel, KeyHandler handler) {
         this.gamePanel = gamePanel;
         this.handler = handler;
@@ -143,7 +143,20 @@ public class Player extends Entity{
 
     public void pickUpObject(int index) {
         if(index != 999) {
-            gamePanel.base[index] = null;
+            String objectName = gamePanel.base[index].name;
+
+            switch (objectName) {
+                case "Key":
+                    gamePanel.playSoundEffect(1);
+                    hasKey++;
+                    gamePanel.base[index] = null;
+                    break;
+                case "Door":
+                    if(hasKey > 0) {
+                        gamePanel.base[index] = null;
+                        hasKey--;
+                    }
+            }
         }
     }
 

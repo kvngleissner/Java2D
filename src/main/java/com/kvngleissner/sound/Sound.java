@@ -12,6 +12,7 @@ public class Sound {
     FloatControl floatControl;
     public Sound() {
         soundUrl[0] = getClass().getResource("/sound/music/Town.wav");
+        soundUrl[1] = getClass().getResource("/sound/effects/pickUp.wav");
     }
 
     public void setFile(int i) {
