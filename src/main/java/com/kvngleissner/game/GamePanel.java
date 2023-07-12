@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler(this);
     Sound soundManager = new Sound();
     Thread gameThread;
+    public Ui ui = new Ui(this);
     public Player player = new Player(this, keyHandler);
     public AssetHandler assetHandler = new AssetHandler(this);
     public TileManager tileManager = new TileManager(this);
@@ -106,8 +107,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         player.draw(graphics2D);
+        ui.draw(graphics2D);
         graphics2D.dispose();
     }
+
 
     public void playMusic(int i) {
         soundManager.setFile(i);
