@@ -1,6 +1,7 @@
 package com.kvngleissner.object;
 
 import com.kvngleissner.game.GamePanel;
+import com.kvngleissner.handler.UtilityHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,8 @@ public class ObjectBase {
     public Rectangle solidArea = new Rectangle(0,0,48,48);
     public int solidAreaDefaultX = 0;
     public int solidAreaDefaultY = 0;
+    UtilityHandler utilityHandler = new UtilityHandler();
+
 
     public void drawObject(Graphics2D graphics2D, GamePanel panel) {
         int screenX = worldXPosition - panel.player.worldXPos + panel.player.screenX;

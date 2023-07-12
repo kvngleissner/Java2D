@@ -1,6 +1,7 @@
 package com.kvngleissner.tile;
 
 import com.kvngleissner.game.GamePanel;
+import com.kvngleissner.handler.UtilityHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,30 +29,12 @@ public class TileManager {
      * And sets if they are solid or not
      */
     public void getTileImage() {
-        try {
-            tiles[0] = new Tile();
-            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-
-            tiles[1] = new Tile();
-            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
-            tiles[1].collision = true;
-
-            tiles[2] = new Tile();
-            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-            tiles[2].collision = true;
-
-            tiles[3] = new Tile();
-            tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
-
-            tiles[4] = new Tile();
-            tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-            tiles[4].collision = true;
-
-            tiles[5] = new Tile();
-            tiles[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
+        setup(0, "grass", false);
+        setup(1, "wall", true);
+        setup(2, "water", true);
+        setup(3, "earth", false);
+        setup(4, "tree", true);
+        setup(5, "sand", false);
     }
 
     /**
@@ -109,6 +92,18 @@ public class TileManager {
             reader.close();
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+    }
+
+    public void setup(int index, String path, boolean collision) {
+        UtilityHandler utilityHandler = new UtilityHandler();
+        try {
+            tiles[index] = new Tile();
+            tiles[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + path + ".png"));
+            tiles[index].image = utilityHandler.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
+            tiles[index].collision = collision;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
