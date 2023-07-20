@@ -30,7 +30,6 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     public Ui ui = new Ui(this);
     public Player player = new Player(this, keyHandler);
-    public Ui ui = new Ui(this);
     public AssetHandler assetHandler = new AssetHandler(this);
     public TileManager tileManager = new TileManager(this);
     public ObjectBase base[] = new ObjectBase[10];
